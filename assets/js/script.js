@@ -39,7 +39,7 @@ function passOptions
 
 var length = parseInt (
   prompt('How many characters would you like the password to be?')
-);
+)
 console.log(length);
 
 if(Number.isNaN(length)) {
@@ -50,7 +50,7 @@ if(Number.isNaN(length)) {
 if (length < 8) {
   alert('It must be at least 8 characters long')
   return null;
-}
+};
 
 
 
