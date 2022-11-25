@@ -4,12 +4,14 @@ generateBtn.addEventListener("click", writePassword);
 
 var passwordOptions = [];
 
+var charTypeCounter = 0;
+
 //numbers array (2 different ways)
 var numbers = Array.from(Array(10).keys());
 console.log(numbers);
 
-var numbers2 = [...Array(10).keys()];
-console.log(numbers2);
+// var numbers2 = [...Array(10).keys()];
+// console.log(numbers2);
 
 //uppercase letter array
 var ALPHA = Array.from(Array(26)).map((e, i) => i + 65);
@@ -27,38 +29,6 @@ var specCharacters = spec.map((x) => String.fromCharCode(x));
 console.log(specCharacters);
 
 
-var upperCaseLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var specialChars = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "~", "`", "?", "/", "<", ">", ",", "."];
-
-
-//chooses an uppercase letter randomly
-function getRandomUpperCaseLetter() {
-  var uppercaseAlphabet = generateAlphabet();
-  return uppercaseAlphabet[
-    Math.round(Math.random() * uppercaseAlphabet.length)
-  ];
-};
-
-//chooses an lowercase letter randomly
-function getRandomLowerCaseLetter() {
-  var lowercaseAlphabet = generateAlphabet();
-  return lowercaseAlphabet[
-    Math.round(Math.random() * lowercaseAlphabet.length)
-  ];
-};
-
-//chooses a number randomly
-function getRandomNumber() {
-  var numbers = generateAlphabet();
-  return numbers[Math.round(Math.random() * numbers.length)];
-};
-
-//chooses a special character randomly
-function getRandomSpecChar() {
-  var specCharacters = generateAlphabet();
-  return specCharacters[Math.round(Math.random() * specCharacters.length)];
-};
 
 
 //function generatePassword()
@@ -66,7 +36,7 @@ function generatePassword() {
   var passwordLength = parseInt(
     window.prompt(
       "How many characters would you like the password to be? It must be at least 8 characters long."
-    )
+      )
   );
   console.log(length);
 
@@ -84,10 +54,11 @@ function generatePassword() {
     var userOptions = window.prompt(
       "Should we include uppercase letters in the password?"
     );
-
+    
     if (userOptions.hasUpperCase) {
       passwordOptions = passwordOptions.concat(upperCaseLetters);
       // guaranteedChar.push(someFunction(upperCaseLetters));
+      charTypeCounter++;
     };
 
     var userOptions = window.prompt(
@@ -97,41 +68,84 @@ function generatePassword() {
     if (userOptions.hasLowerCase) {
       passwordOptions = passwordOptions.concat(upperCaseLetters);
       // guaranteedChar.push(someFunction(upperCaseLetters));
+      charTypeCounter++;
     };
 
     var userOptions = window.prompt(
       "Should we include numbers in the password?"
-    );
-
-    if (userOptions.hasNumbers) {
-      passwordOptions = passwordOptions.concat(numbers);
+      );
+      
+      if (userOptions.hasNumbers) {
+        passwordOptions = passwordOptions.concat(numbers);
       // guaranteedChar.push(someFunction(numbers));
+      charTypeCounter++;
     };
 
     var userOptions = window.prompt(
       "Should we include special characters in the password?"
     );
-
+    
     if (userOptions.hasSpecialChars) {
       passwordOptions = passwordOptions.concat(specialChars);
       // guaranteedChar.push(someFunction(specialChars));
+      charTypeCounter++;
     };
+    
+    if (charTypeCounter.length >= 2) {
+      getRandomPasswordChar();
+    } else {
+      //clear array and start again
+    }
   };
-};
+};// more functions need to be nested before this function finished...passwordLength is needed later, at the very least.
 
 //chooses a passwordOptions character randomly
 function getRandomPasswordChar() {
   var passwordCharacter = generateAlphabet();
-  return passwordCharacter[Math.round(Math.random() * passwordCharacter.length)];
+  return passwordCharacter[Math.round(Math.random() * passwordCharacter.length)];// * passwordLength
 };
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
+  
   passwordText.value = password;
 };
+
+//check for presence each type of chosen character in generated password.  if present {display} else {redo generation}
+
+
+
+// var upperCaseLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+// var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+// var specialChars = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "~", "`", "?", "/", "<", ">", ",", "."];
+
+
+//chooses an uppercase letter randomly
+// function getRandomUpperCaseLetter() {
+//   var uppercaseAlphabet = generateAlphabet();
+//   return uppercaseAlphabet[Math.round(Math.random() * uppercaseAlphabet.length)];
+// };
+
+//chooses an lowercase letter randomly
+// function getRandomLowerCaseLetter() {
+//   var lowercaseAlphabet = generateAlphabet();
+//   return lowercaseAlphabet[Math.round(Math.random() * lowercaseAlphabet.length)];
+// };
+
+//chooses a number randomly
+// function getRandomNumber() {
+//   var numbers = generateAlphabet();
+//   return numbers[Math.round(Math.random() * numbers.length)];
+// };
+
+//chooses a special character randomly
+// function getRandomSpecChar() {
+//   var specCharacters = generateAlphabet();
+//   return specCharacters[Math.round(Math.random() * specCharacters.length)];
+// };
+
 
 // Add event listener to generate button
 // generateBtn.addEventListener("click", writePassword);
