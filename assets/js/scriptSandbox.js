@@ -45,57 +45,57 @@ console.log(specCharacters);
 
 //function generatePassword()
 function generatePassword() {
-  var passwordLength = parseInt(
-    window.prompt(
-      "How many characters would you like the password to be? It must be at least 8 characters long."
-      )
-  );
-  console.log(length);
+  var passwordLength = parseInt(window.prompt("How many characters would you like the password to be? It must be at least 8 characters long."));
 
-  if (Number.isNaN(passwordLength)) {
+  if (Number.isNaN(passwordLength)) {//while loop
     alert("Password must be a numberic number");
     return null;
   } else if (passwordLength.length < 8) {
     alert("It must be at least 8 characters long.");
     return null;
   } else {
+    console.log(passwordLength);
     chooseCharacters();
   };
 
   function chooseCharacters() {
-    var userOptions = window.prompt("Should we include uppercase letters in the password?");
+    var userOptions = confirm("Should we include uppercase letters in the password?");
     
-    if (userOptions.hasUpperCase) {
+    if (userOptions === true) {
       passwordOptions = passwordOptions.concat(upperCaseAlphabet);
       // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
       charTypeCounter++;
+      console.log(passwordOptions);
     };
 
-    var userOptions = window.prompt("Should we include lowercase letters in the password?");
+    var userOptions = confirm("Should we include lowercase letters in the password?");
 
-    if (userOptions.hasLowerCase) {
+    if (userOptions === true) {
       passwordOptions = passwordOptions.concat(lowerCaseAlphabet);
       // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
       charTypeCounter++;
+      console.log(passwordOptions);
     };
 
-    var userOptions = window.prompt("Should we include numbers in the password?");
+    var userOptions = confirm("Should we include numbers in the password?");
       
-      if (userOptions.hasNumbers) {
+      if (userOptions === true) {
         passwordOptions = passwordOptions.concat(numbers);
       // guaranteedChar.push(getRandomPasswordChar(numbers));
       charTypeCounter++;
+      console.log(passwordOptions);
     };
 
-    var userOptions = window.prompt("Should we include special characters in the password?");
+    var userOptions = confirm("Should we include special characters in the password?");
     
-    if (userOptions.hasSpecialChars) {
+    if (userOptions === true) {
       passwordOptions = passwordOptions.concat(specialCharacters);
       // guaranteedChar.push(getRandomPasswordChar(specialChars));
       charTypeCounter++;
+      console.log(passwordOptions);
     };
     
-    if (charTypeCounter.length >= 2) {
+    if (charTypeCounter >= 2) {
       getRandomPasswordChar();
     } else {
       alert("You must choose at least 2 types of characters.");
@@ -109,7 +109,7 @@ function generatePassword() {
 //chooses a passwordOptions character randomly
 function getRandomPasswordChar() {
   var passwordCharacter = generateAlphabet();
-  return passwordCharacter[Math.round(Math.random() * passwordCharacter.length)];// * passwordLength
+  return passwordCharacter[Math.round(Math.random() * passwordCharacter.length)];// * passwordLength?  must do this once for each character length user has chosen
 };
 
 // Write password to the #password input
@@ -305,3 +305,37 @@ function writePassword() {
 //   wantSpecChar: hasSpecChar,
 //   wantNumbers: hasNumbers
 // ];
+
+// function chooseCharacters() {
+//   var userOptions = confirm("Should we include uppercase letters in the password?");
+  
+//   if (userOptions.hasUpperCase) {
+//     passwordOptions = passwordOptions.concat(upperCaseAlphabet);
+//     // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
+//     charTypeCounter++;
+//   };
+
+//   var userOptions = confirm("Should we include lowercase letters in the password?");
+
+//   if (userOptions.hasLowerCase) {
+//     passwordOptions = passwordOptions.concat(lowerCaseAlphabet);
+//     // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
+//     charTypeCounter++;
+//   };
+
+//   var userOptions = confirm("Should we include numbers in the password?");
+    
+//     if (userOptions.hasNumbers) {
+//       passwordOptions = passwordOptions.concat(numbers);
+//     // guaranteedChar.push(getRandomPasswordChar(numbers));
+//     charTypeCounter++;
+//   };
+
+//   var userOptions = confirm("Should we include special characters in the password?");
+  
+//   if (userOptions.hasSpecialChars) {
+//     passwordOptions = passwordOptions.concat(specialCharacters);
+//     // guaranteedChar.push(getRandomPasswordChar(specialChars));
+//     charTypeCounter++;
+//   };
+// };
