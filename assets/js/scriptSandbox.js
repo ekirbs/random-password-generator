@@ -4,6 +4,18 @@ generateBtn.addEventListener("click", writePassword);
 
 var passwordOptions = [];
 
+//object to store user inputs
+// var passwordChoices = [
+//   userLength: length,
+//   wantLowerCase: hasLowerCase,
+//   wantUpperCase: hasUpperCase,
+//   wantSpecChar: hasSpecChar,
+//   wantNumbers: hasNumbers
+// ];
+
+// console.log(passwordChoices);
+//   return passwordChoices;
+
 var charTypeCounter = 0;
 
 //numbers array (2 different ways)
@@ -51,50 +63,45 @@ function generatePassword() {
   };
 
   function chooseCharacters() {
-    var userOptions = window.prompt(
-      "Should we include uppercase letters in the password?"
-    );
+    var userOptions = window.prompt("Should we include uppercase letters in the password?");
     
     if (userOptions.hasUpperCase) {
-      passwordOptions = passwordOptions.concat(upperCaseLetters);
-      // guaranteedChar.push(someFunction(upperCaseLetters));
+      passwordOptions = passwordOptions.concat(upperCaseAlphabet);
+      // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
       charTypeCounter++;
     };
 
-    var userOptions = window.prompt(
-      "Should we include lowercase letters in the password?"
-    );
+    var userOptions = window.prompt("Should we include lowercase letters in the password?");
 
     if (userOptions.hasLowerCase) {
-      passwordOptions = passwordOptions.concat(upperCaseLetters);
-      // guaranteedChar.push(someFunction(upperCaseLetters));
+      passwordOptions = passwordOptions.concat(lowerCaseAlphabet);
+      // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
       charTypeCounter++;
     };
 
-    var userOptions = window.prompt(
-      "Should we include numbers in the password?"
-      );
+    var userOptions = window.prompt("Should we include numbers in the password?");
       
       if (userOptions.hasNumbers) {
         passwordOptions = passwordOptions.concat(numbers);
-      // guaranteedChar.push(someFunction(numbers));
+      // guaranteedChar.push(getRandomPasswordChar(numbers));
       charTypeCounter++;
     };
 
-    var userOptions = window.prompt(
-      "Should we include special characters in the password?"
-    );
+    var userOptions = window.prompt("Should we include special characters in the password?");
     
     if (userOptions.hasSpecialChars) {
-      passwordOptions = passwordOptions.concat(specialChars);
-      // guaranteedChar.push(someFunction(specialChars));
+      passwordOptions = passwordOptions.concat(specialCharacters);
+      // guaranteedChar.push(getRandomPasswordChar(specialChars));
       charTypeCounter++;
     };
     
     if (charTypeCounter.length >= 2) {
       getRandomPasswordChar();
     } else {
-      //clear array and start again
+      alert("You must choose at least 2 types of characters.");
+      passwordOptions.splice(0, passwordOptions.length);
+      charTypeCounter = 0;
+      chooseCharacters();
     }
   };
 };// more functions need to be nested before this function finished...passwordLength is needed later, at the very least.
@@ -172,21 +179,6 @@ function writePassword() {
   if (choseUpperCase === false && choseLowerCase === flase && choseSpecialCharacters === flase && choseNumbers === false) {
     alert('You must choose at least one char type');
   };
-  
-  
-  
-  
-  //object to store user inputs
-  var passwordOptions = [
-    userLength: length,
-    wantLowerCase: hasLowerCase,
-    wantUpperCase: hasUpperCase,
-    wantSpecChar: hasSpecChar,
-    wantNumbers: hasNumbers
-  ];
-  
-  console.log(passwordOptions)
-  return passwordOptions;
   
   
   passOptions();
