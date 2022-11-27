@@ -8,27 +8,14 @@ var guaranteedChar = [];
 
 var password = [];
 
-//object to store user inputs
-// var passwordChoices = {
-//   userLength: length,
-//   wantLowerCase: hasLowerCase,
-//   wantUpperCase: hasUpperCase,
-//   wantSpecChar: hasSpecChar,
-//   wantNumbers: hasNumbers
-// };
-
-// console.log(passwordChoices);
-//   return passwordChoices;
-
 var charTypeCounter = 0;
+
+var passwordLength;
 
 //numbers array (2 different ways)
 var numbers = Array.from(Array(10).keys());
 numbers.toString();
 console.log(numbers);
-
-// var numbers2 = [...Array(10).keys()];
-// console.log(numbers2);
 
 //uppercase letter array
 var ALPHA = Array.from(Array(26)).map((e, i) => i + 65);
@@ -45,15 +32,13 @@ var spec = Array.from(Array(16)).map((e, i) => i + 32);
 var specCharacters = spec.map((x) => String.fromCharCode(x));
 console.log(specCharacters);
 
-var passwordLength;
-
 //function generatePassword()
 function generatePassword() {
   passwordLength = Math.floor(Number(window.prompt("How many characters would you like the password to be? It must be between 8 and 128.")));
-
+  
   if (isNaN(passwordLength)) {
     // while loop
-    alert("That is not  a number.");
+    alert("That is not a number.");
     generatePassword();
   } else if (passwordLength < 8) {
     alert("It must be at least 8 characters long.");
@@ -71,7 +56,7 @@ function generatePassword() {
 
 function chooseCharacters() {
   var userOptions = confirm("Should we include uppercase letters in the password?");
-
+  
   if (userOptions === true) {
     passwordOptions = passwordOptions.concat(uppercaseAlphabet);
     guaranteedChar.push(uppercaseAlphabet[Math.floor(Math.random() * uppercaseAlphabet.length)]);
@@ -79,9 +64,9 @@ function chooseCharacters() {
     console.log(passwordOptions);
     console.log(guaranteedChar);
   };
-
+  
   var userOptions = confirm("Should we include lowercase letters in the password?");
-
+  
   if (userOptions === true) {
     passwordOptions = passwordOptions.concat(lowercaseAlphabet);
     guaranteedChar.push(lowercaseAlphabet[Math.floor(Math.random() * lowercaseAlphabet.length)]);
@@ -89,9 +74,9 @@ function chooseCharacters() {
     console.log(passwordOptions);
     console.log(guaranteedChar);
   };
-
+  
   var userOptions = confirm("Should we include numbers in the password?");
-
+  
   if (userOptions === true) {
     passwordOptions = passwordOptions.concat(numbers);
     guaranteedChar.push(numbers[Math.floor(Math.random() * numbers.length)]);
@@ -99,9 +84,9 @@ function chooseCharacters() {
     console.log(passwordOptions);
     console.log(guaranteedChar);
   };
-
+  
   var userOptions = confirm("Should we include special characters in the password?");
-
+  
   if (userOptions === true) {
     passwordOptions = passwordOptions.concat(specCharacters);
     guaranteedChar.push(specCharacters[Math.floor(Math.random() * specCharacters.length)]);
@@ -109,12 +94,12 @@ function chooseCharacters() {
     console.log(passwordOptions);
     console.log(guaranteedChar);
   };
-
+  
   if (charTypeCounter >= 1) {
     getRandomChar();
     return chooseCharacters();
   } else {
-    alert("You must choose at least 2 types of characters.");
+    alert("You must choose at least 1 character type!");
     passwordOptions.splice(0, passwordOptions.length);
     charTypeCounter = 0;
     chooseCharacters();
@@ -123,12 +108,13 @@ function chooseCharacters() {
 
 // chooses passwordOptions characters randomly to fill the rest of the guaranteedChar array
 function getRandomChar() {
-  for (var i = 0; i <= (passwordLength - charTypeCounter); i++) {
-  var passwordCharacter = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
-  console.log(passwordCharacter);
-    var password = passwordOptions.substring(0, passwordOptions.length + 1);
-    console.log(password);
+  for (var i = 0; i <= (passwordLength - charTypeCounter - 1); i++) {
+    // var passwordCharacter = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
+    // console.log(passwordCharacter);
+    guaranteedChar.push(passwordOptions[Math.floor(Math.random() * passwordOptions.length)]);
+    // var password = passwordOptions.substring(0, passwordOptions.length + 1);
   };
+  console.log(password);
   shufflePasswordChar();
   guaranteedChar.splice(0, guaranteedChar.length);
   passwordOptions.splice(0, passwordOptions.length);
@@ -145,30 +131,45 @@ function shufflePasswordChar() {
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
+  
   passwordText.value = password;
 };
 
 // Fisher-Yates algorithm: "if you need to shuffle an array and have a truly random distribution of items, you need to implement the Fisher-Yates algorithm."
 // const shuffleArray = array => {
-//   for (let i = array.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     const temp = array[i];
-//     array[i] = array[j];
-//     array[j] = temp;
-//   }
-// }
-
-// function passwordValidation() {
-//   var validation = password.includes();
-//   if ((validation = false)) {
-//     password.splice(0, password.length);
-//     getRandomChar();
-//   } else {
-//     writePassword();
-//     return passwordValidation();
-//   }
-// };
+  //   for (let i = array.length - 1; i > 0; i--) {
+    //     const j = Math.floor(Math.random() * (i + 1));
+    //     const temp = array[i];
+    //     array[i] = array[j];
+    //     array[j] = temp;
+    //   }
+    // }
+    
+    //object to store user inputs
+    // var passwordChoices = {
+      //   userLength: length,
+      //   wantLowerCase: hasLowerCase,
+      //   wantUpperCase: hasUpperCase,
+      //   wantSpecChar: hasSpecChar,
+      //   wantNumbers: hasNumbers
+      // };
+      
+      // console.log(passwordChoices);
+      //   return passwordChoices;
+      
+      // var numbers2 = [...Array(10).keys()];
+      // console.log(numbers2);
+      
+      // function passwordValidation() {
+        //   var validation = password.includes();
+        //   if ((validation = false)) {
+          //     password.splice(0, password.length);
+          //     getRandomChar();
+          //   } else {
+          //     writePassword();
+          //     return passwordValidation();
+          //   }
+          // };
 
 // function getRandomChar() {
 //   var passwordCharacter = passwordOptions[Math.round(Math.random() * passwordOptions.length) * passwordLength]; // * passwordLength  must do this once for each character length user has chosen
@@ -232,8 +233,6 @@ function writePassword() {
   function generatePassword
   
   
-  
-  
   function passOptions()
   
   
@@ -284,11 +283,8 @@ function writePassword() {
     }
     
     
-    
-    
     //make a function (someFunction) that randomizes my characters
-    
-    
+        
     
     //create a for loop to iterate over the password length from the options object, selection random I from the array of possible chars, concacting and return them into the results of the variable.
     
@@ -297,8 +293,7 @@ function writePassword() {
     //return the result and make it into a string and pass it into writePassword
     
     return result.join('');
-    
-  
+      
   }
   
   
@@ -330,16 +325,12 @@ function writePassword() {
   window.prompt("Do you want to use special characters?)
   if yes concat(array)
   
-  you must choose at least two character types
-  
-  if 
-  
+  you must choose at least two character types  
   
   
   if 
   randomly choose x number of characters from the array
-  
-  
+    
   
   for (var i = 0; i <= passwordLength; i++) {
     var randomNumber = Math.floor(Math.random() * chars.length);
