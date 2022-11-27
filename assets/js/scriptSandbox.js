@@ -101,16 +101,21 @@ function chooseCharacters() {
     console.log(passwordOptions);
     console.log(guaranteedChar);
   };
-  
-  if (charTypeCounter >= 1) {
-    getRandomChar();
-    // return chooseCharacters();
-  } else {
+
+  if (!userOptions) {
     alert("You must choose at least 1 character type!");
-    passwordOptions.splice(0, passwordOptions.length);
-    charTypeCounter = 0;
-    chooseCharacters();
+    return null;
   };
+  
+  // if (charTypeCounter >= 1) {
+  //   getRandomChar();
+  //   // return chooseCharacters();
+  // } else {
+  //   alert("You must choose at least 1 character type!");
+  //   passwordOptions.splice(0, passwordOptions.length);
+  //   charTypeCounter = 0;
+  //   chooseCharacters();
+  // };
 };
 
 //check if options exist if not exit the function
@@ -283,7 +288,12 @@ function writePassword() {
     //return the random array
     return randomChar;
   }
-  
+
+  function randomizeArray(arr) {
+   var randomI = Math.floor(Math.random() * arr.length);  //(my computer changes this to Array.length)
+   var randomChar = arr[randomI]
+   return randomChar;
+  }
   
   //write a function to actually generate the password
   function genPassword() {
