@@ -4,14 +4,18 @@ generateBtn.addEventListener("click", writePassword);
 
 var passwordOptions = [];
 
+var guaranteedChar = [];
+
+var password = [];
+
 //object to store user inputs
-// var passwordChoices = [
+// var passwordChoices = {
 //   userLength: length,
 //   wantLowerCase: hasLowerCase,
 //   wantUpperCase: hasUpperCase,
 //   wantSpecChar: hasSpecChar,
 //   wantNumbers: hasNumbers
-// ];
+// };
 
 // console.log(passwordChoices);
 //   return passwordChoices;
@@ -20,6 +24,7 @@ var charTypeCounter = 0;
 
 //numbers array (2 different ways)
 var numbers = Array.from(Array(10).keys());
+numbers.toString();
 console.log(numbers);
 
 // var numbers2 = [...Array(10).keys()];
@@ -40,94 +45,136 @@ var spec = Array.from(Array(16)).map((e, i) => i + 32);
 var specCharacters = spec.map((x) => String.fromCharCode(x));
 console.log(specCharacters);
 
-
-
+var passwordLength;
 
 //function generatePassword()
 function generatePassword() {
-  var passwordLength = parseInt(window.prompt("How many characters would you like the password to be? It must be at least 8 characters long."));
+  passwordLength = Math.floor(Number(window.prompt("How many characters would you like the password to be? It must be between 8 and 128.")));
 
-  if (Number.isNaN(passwordLength)) {//while loop
-    alert("Password must be a numberic number");
-    return null;
-  } else if (passwordLength.length < 8) {
+  if (isNaN(passwordLength)) {
+    // while loop
+    alert("That is not  a number.");
+    generatePassword();
+  } else if (passwordLength < 8) {
     alert("It must be at least 8 characters long.");
-    return null;
+    generatePassword();
+  } else if (passwordLength > 128) {
+    alert("It must no more than 128 characters long.");
+    generatePassword();
   } else {
+    //could make and call an array of length and possible charcacters and push here
     console.log(passwordLength);
     chooseCharacters();
+    return generatePassword();
+  };
+}; // could not call new function and just nest following if else argument in this function
+
+function chooseCharacters() {
+  var userOptions = confirm("Should we include uppercase letters in the password?");
+
+  if (userOptions === true) {
+    passwordOptions = passwordOptions.concat(uppercaseAlphabet);
+    guaranteedChar.push(uppercaseAlphabet[Math.floor(Math.random() * uppercaseAlphabet.length)]);
+    charTypeCounter++;
+    console.log(passwordOptions);
+    console.log(guaranteedChar);
   };
 
-  function chooseCharacters() {
-    var userOptions = confirm("Should we include uppercase letters in the password?");
-    
-    if (userOptions === true) {
-      passwordOptions = passwordOptions.concat(upperCaseAlphabet);
-      // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
-      charTypeCounter++;
-      console.log(passwordOptions);
-    };
+  var userOptions = confirm("Should we include lowercase letters in the password?");
 
-    var userOptions = confirm("Should we include lowercase letters in the password?");
-
-    if (userOptions === true) {
-      passwordOptions = passwordOptions.concat(lowerCaseAlphabet);
-      // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
-      charTypeCounter++;
-      console.log(passwordOptions);
-    };
-
-    var userOptions = confirm("Should we include numbers in the password?");
-      
-      if (userOptions === true) {
-        passwordOptions = passwordOptions.concat(numbers);
-      // guaranteedChar.push(getRandomPasswordChar(numbers));
-      charTypeCounter++;
-      console.log(passwordOptions);
-    };
-
-    var userOptions = confirm("Should we include special characters in the password?");
-    
-    if (userOptions === true) {
-      passwordOptions = passwordOptions.concat(specialCharacters);
-      // guaranteedChar.push(getRandomPasswordChar(specialChars));
-      charTypeCounter++;
-      console.log(passwordOptions);
-    };
-    
-    if (charTypeCounter >= 2) {
-      getRandomPasswordChar();
-    } else {
-      alert("You must choose at least 2 types of characters.");
-      passwordOptions.splice(0, passwordOptions.length);
-      charTypeCounter = 0;
-      chooseCharacters();
-    }
+  if (userOptions === true) {
+    passwordOptions = passwordOptions.concat(lowercaseAlphabet);
+    guaranteedChar.push(lowercaseAlphabet[Math.floor(Math.random() * lowercaseAlphabet.length)]);
+    charTypeCounter++;
+    console.log(passwordOptions);
+    console.log(guaranteedChar);
   };
-};// more functions need to be nested before this function finished...passwordLength is needed later, at the very least.
 
-//chooses a passwordOptions character randomly
-function getRandomPasswordChar() {
-  var passwordCharacter = generateAlphabet();
-  return passwordCharacter[Math.round(Math.random() * passwordCharacter.length)];// * passwordLength?  must do this once for each character length user has chosen
+  var userOptions = confirm("Should we include numbers in the password?");
+
+  if (userOptions === true) {
+    passwordOptions = passwordOptions.concat(numbers);
+    guaranteedChar.push(numbers[Math.floor(Math.random() * numbers.length)]);
+    charTypeCounter++;
+    console.log(passwordOptions);
+    console.log(guaranteedChar);
+  };
+
+  var userOptions = confirm("Should we include special characters in the password?");
+
+  if (userOptions === true) {
+    passwordOptions = passwordOptions.concat(specCharacters);
+    guaranteedChar.push(specCharacters[Math.floor(Math.random() * specCharacters.length)]);
+    charTypeCounter++;
+    console.log(passwordOptions);
+    console.log(guaranteedChar);
+  };
+
+  if (charTypeCounter >= 1) {
+    getRandomChar();
+    return chooseCharacters();
+  } else {
+    alert("You must choose at least 2 types of characters.");
+    passwordOptions.splice(0, passwordOptions.length);
+    charTypeCounter = 0;
+    chooseCharacters();
+  };
 };
 
-// Write password to the #password input
+// chooses passwordOptions characters randomly to fill the rest of the guaranteedChar array
+function getRandomChar() {
+  for (var i = 0; i <= (passwordLength - charTypeCounter); i++) {
+  var passwordCharacter = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
+  console.log(passwordCharacter);
+    var password = passwordOptions.substring(0, passwordOptions.length + 1);
+    console.log(password);
+  }; // have to randomize the guaranteedChar array and then display
+  writePassword();
+  guaranteedChar.splice(0, guaranteedChar.length);
+  passwordOptions.splice(0, passwordOptions.length);
+  charTypeCounter = 0;
+  return getRandomChar();
+};
+
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  
+
   passwordText.value = password;
 };
 
+// function passwordValidation() {
+//   var validation = password.includes();
+//   if ((validation = false)) {
+//     password.splice(0, password.length);
+//     getRandomChar();
+//   } else {
+//     writePassword();
+//     return passwordValidation();
+//   }
+// };
+
+// function getRandomChar() {
+//   var passwordCharacter = passwordOptions[Math.round(Math.random() * passwordOptions.length) * passwordLength]; // * passwordLength  must do this once for each character length user has chosen
+//   console.log(passwordCharacter);
+// };
+
+// passwordOptions.sort(() => Math.random() - Math.random()).slice(0, passwordLength);
+
+// function getRandomChar(arr, num) {
+//   var shuffled = [...arr].sort(() => 0.5 - Math.random());
+
+//   return shuffled.slice(0, num);
+// }
+// console.log(getRandomChar(passwordOptions, passwordLength));
+
+// Write password to the #password input
+
 //check for presence each type of chosen character in generated password.  if present {display} else {redo generation}
-
-
 
 // var upperCaseLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 // var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 // var specialChars = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "~", "`", "?", "/", "<", ">", ",", "."];
-
 
 //chooses an uppercase letter randomly
 // function getRandomUpperCaseLetter() {
@@ -152,7 +199,6 @@ function writePassword() {
 //   var specCharacters = generateAlphabet();
 //   return specCharacters[Math.round(Math.random() * specCharacters.length)];
 // };
-
 
 // Add event listener to generate button
 // generateBtn.addEventListener("click", writePassword);
@@ -308,7 +354,7 @@ function writePassword() {
 
 // function chooseCharacters() {
 //   var userOptions = confirm("Should we include uppercase letters in the password?");
-  
+
 //   if (userOptions.hasUpperCase) {
 //     passwordOptions = passwordOptions.concat(upperCaseAlphabet);
 //     // guaranteedChar.push(getRandomPasswordChar(upperCaseLetters));
@@ -324,7 +370,7 @@ function writePassword() {
 //   };
 
 //   var userOptions = confirm("Should we include numbers in the password?");
-    
+
 //     if (userOptions.hasNumbers) {
 //       passwordOptions = passwordOptions.concat(numbers);
 //     // guaranteedChar.push(getRandomPasswordChar(numbers));
@@ -332,10 +378,59 @@ function writePassword() {
 //   };
 
 //   var userOptions = confirm("Should we include special characters in the password?");
-  
+
 //   if (userOptions.hasSpecialChars) {
 //     passwordOptions = passwordOptions.concat(specialCharacters);
 //     // guaranteedChar.push(getRandomPasswordChar(specialChars));
 //     charTypeCounter++;
 //   };
 // };
+
+// if (Number.isNaN(passwordLength)) { // while loop
+//   alert("That is not  a number.");
+//   return null;
+// } else if (passwordLength.length < 8) {
+//   alert("It must be at least 8 characters long.");
+//   return null;
+// } else {
+//   console.log(passwordLength);
+//   chooseCharacters();
+// };
+
+// function getRandomPasswordChar() {
+//   var passwordCharacter = generateAlphabet();
+//   console.log(passwordCharacter);
+//   return passwordOptions[Math.round(Math.random() * passwordOptions.length)]; // * passwordLength?  must do this once for each character length user has chosen
+// };
+
+// for (var i = 0; i < zooAnimals.length; i++) { 
+//   console.log("I am going to zoo to see " + zooAnimals[i] + ".");
+// }
+
+// var userOptions = confirm("Should we include lowercase letters in the password?");
+
+//   if (userOptions === true) {
+//     passwordOptions = passwordOptions.concat(lowercaseAlphabet);
+//     guaranteedChar.push(getRandomPasswordChar(lowercaseAlphabet));
+//     charTypeCounter++;
+//     console.log(passwordOptions);
+//   }
+
+//   var userOptions = confirm("Should we include numbers in the password?");
+
+//   if (userOptions === true) {
+//     passwordOptions = passwordOptions.concat(numbers);
+//     guaranteedChar.push(getRandomPasswordChar(numbers));
+//     charTypeCounter++;
+//     console.log(passwordOptions);
+//   }
+
+//   var userOptions = confirm(
+//     "Should we include special characters in the password?"
+//   );
+
+//   if (userOptions === true) {
+//     passwordOptions = passwordOptions.concat(specCharacters);
+//     guaranteedChar.push(getRandomPasswordChar(specCharacters));
+//     charTypeCounter++;
+//     console.log(passwordOptions);
