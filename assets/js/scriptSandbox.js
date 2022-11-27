@@ -128,12 +128,18 @@ function getRandomChar() {
   console.log(passwordCharacter);
     var password = passwordOptions.substring(0, passwordOptions.length + 1);
     console.log(password);
-  }; // have to randomize the guaranteedChar array and then display
-  writePassword();
+  };
+  shufflePasswordChar();
   guaranteedChar.splice(0, guaranteedChar.length);
   passwordOptions.splice(0, passwordOptions.length);
   charTypeCounter = 0;
   return getRandomChar();
+};
+
+function shufflePasswordChar() {
+  password = guaranteedChar.sort((a, b) => 0.5 - Math.random());
+  console.log(password);
+  writePassword();
 };
 
 function writePassword() {
@@ -142,6 +148,16 @@ function writePassword() {
 
   passwordText.value = password;
 };
+
+// Fisher-Yates algorithm: "if you need to shuffle an array and have a truly random distribution of items, you need to implement the Fisher-Yates algorithm."
+// const shuffleArray = array => {
+//   for (let i = array.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     const temp = array[i];
+//     array[i] = array[j];
+//     array[j] = temp;
+//   }
+// }
 
 // function passwordValidation() {
 //   var validation = password.includes();
