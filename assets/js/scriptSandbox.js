@@ -12,7 +12,7 @@ var charTypeCounter = 0;
 
 var passwordLength;
 
-//numbers array (2 different ways)
+//numbers array
 var numbers = Array.from(Array(10).keys());
 numbers.toString();
 console.log(numbers);
