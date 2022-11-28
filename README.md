@@ -2,35 +2,18 @@
 
 ## Description
 
-This i
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
-
-## Table of Contents
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+This is my random password generator!  I built this to gain a better understanding on how to utilize different javascript applications.  I wanted the generator to definitely contain at least one character from each type the user chooses.  I also used the Fisher-Yates shuffling algorithm since it's a better method for randomizing code compared to other methods.
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+N/A
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+This program will generate a random password between 8 and 128 characters.  After pressing the start button, the user will be asked how long they want their passowrd to be, and what types of characters they want to include.  The password will definitely include at least one of every character type the user chooses.  Once all the choices are made, the program will display the password in the text box on the screen.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+    ![tutorial clip](./assets/images/tutor-clip.mp4)
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
 
 ## Credits
 
