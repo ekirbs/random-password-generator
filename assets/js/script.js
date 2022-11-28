@@ -4,22 +4,22 @@ var generateBtn = document.querySelector("#generate");
 //uppercase letter array
 var ALPHA = Array.from(Array(26)).map((e, i) => i + 65);
 var uppercaseAlphabet = ALPHA.map((x) => String.fromCharCode(x));
-// console.log(uppercaseAlphabet);
+console.log(uppercaseAlphabet);
 
 //lowercase letter array
 var alpha = Array.from(Array(26)).map((e, i) => i + 97);
 var lowercaseAlphabet = alpha.map((x) => String.fromCharCode(x));
-// console.log(lowercaseAlphabet);
+console.log(lowercaseAlphabet);
 
 //numbers array
 var numbers = Array.from(Array(10).keys());
 numbers.toString();
-// console.log(numbers);
+console.log(numbers);
 
 //special characters array
 var spec = Array.from(Array(16)).map((e, i) => i + 32);
 var specCharacters = spec.map((x) => String.fromCharCode(x));
-// console.log(specCharacters);
+console.log(specCharacters);
 
 //function generatePassword()
 function generatePassword() {
@@ -37,7 +37,7 @@ function generatePassword() {
   // Choose Password Length
   passwordLength = Math.floor(Number(window.prompt("How many characters would you like the password to be? It must be between 8 and 128.")));
   
-  if (Number.isNaN(passwordLength)) { // ISSUE:  what if they click cancel?
+  if (Number.isNaN(passwordLength)) {
     alert("That is not a number.");
     return null;
   };
@@ -57,10 +57,10 @@ function generatePassword() {
   
   if (userOptions === true) {
     passwordOptions = passwordOptions.concat(uppercaseAlphabet);
-    guaranteedChar.push(uppercaseAlphabet[Math.floor(Math.random() * uppercaseAlphabet.length)]);
-    charTypeCounter++;
-    // console.log(passwordOptions);
-    // console.log(guaranteedChar);
+    guaranteedChar.push(uppercaseAlphabet[Math.floor(Math.random() * uppercaseAlphabet.length)]); // pushing one random character for each type they choose.  This ensure all types chosen are represented in the final password.
+    charTypeCounter++; // this character counter is a method to later adjust how many more random characters to pull from the composite array after a x number of slots are filled by the pushes.
+    console.log(passwordOptions); // I'd clean this up and get rid of the console.logs, but left them all here so everystep can be seen.
+    console.log(guaranteedChar);
   };
   
   var userOptions = confirm("Should we include lowercase letters in the password?");
@@ -69,8 +69,8 @@ function generatePassword() {
     passwordOptions = passwordOptions.concat(lowercaseAlphabet);
     guaranteedChar.push(lowercaseAlphabet[Math.floor(Math.random() * lowercaseAlphabet.length)]);
     charTypeCounter++;
-    // console.log(passwordOptions);
-    // console.log(guaranteedChar);
+    console.log(passwordOptions);
+    console.log(guaranteedChar);
   };
   
   var userOptions = confirm("Should we include numbers in the password?");
@@ -79,8 +79,8 @@ function generatePassword() {
     passwordOptions = passwordOptions.concat(numbers);
     guaranteedChar.push(numbers[Math.floor(Math.random() * numbers.length)]);
     charTypeCounter++;
-    // console.log(passwordOptions);
-    // console.log(guaranteedChar);
+    console.log(passwordOptions);
+    console.log(guaranteedChar);
   };
   
   var userOptions = confirm("Should we include special characters in the password?");
@@ -89,8 +89,8 @@ function generatePassword() {
     passwordOptions = passwordOptions.concat(specCharacters);
     guaranteedChar.push(specCharacters[Math.floor(Math.random() * specCharacters.length)]);
     charTypeCounter++;
-    // console.log(passwordOptions);
-    // console.log(guaranteedChar);
+    console.log(passwordOptions);
+    console.log(guaranteedChar);
   };
 
   if (!userOptions) {
@@ -103,7 +103,7 @@ function generatePassword() {
     guaranteedChar.push(passwordOptions[Math.floor(Math.random() * passwordOptions.length)]);
   };
 
-  // Fisher-Yates Randomizing Algorithm
+  // Fisher-Yates Randomizing Algorithm is a good way to randomize (and is needed due to the random characters pushed during choosing types always being in the first slots of the password array)
   function shuffleArray(guaranteedChar) {
     var current = guaranteedChar.length;
     while (0 !== current) {
@@ -116,7 +116,7 @@ function generatePassword() {
     return guaranteedChar;
   };
     
-  // console.log(guaranteedChar);
+  console.log(guaranteedChar);
 
   password = shuffleArray(guaranteedChar).join("");
 
