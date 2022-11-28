@@ -9,12 +9,12 @@ function generatePassword() {
   var guaranteedChar = [];
   
   var password = [];
-  
-  var charTypeCounter = 0;
-  
+    
   var passwordLength;
   
   var setPassword = [];
+  
+  var charTypeCounter = 0;
 
   //uppercase letter array
   var ALPHA = Array.from(Array(26)).map((e, i) => i + 65);
