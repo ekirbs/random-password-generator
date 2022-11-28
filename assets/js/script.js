@@ -13,7 +13,7 @@ function generatePassword() {
   var passwordLength;
   
   var setPassword = [];
-  
+
   var charTypeCounter = 0;
 
   //uppercase letter array
@@ -105,13 +105,13 @@ function generatePassword() {
 
   // Fisher-Yates Randomizing Algorithm
   function shuffleArray(guaranteedChar) {
-    var curId = guaranteedChar.length;
-    while (0 !== curId) {
-      var randId = Math.floor(Math.random() * curId);
-      curId -= 1;
-      var tmp = guaranteedChar[curId];
-      guaranteedChar[curId] = guaranteedChar[randId];
-      guaranteedChar[randId] = tmp;
+    var current = guaranteedChar.length;
+    while (0 !== current) {
+      var random = Math.floor(Math.random() * current);
+      current -= 1;
+      var temp = guaranteedChar[current];
+      guaranteedChar[current] = guaranteedChar[random];
+      guaranteedChar[random] = temp;
     };
     return guaranteedChar;
   };
