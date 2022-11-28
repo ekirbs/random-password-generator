@@ -29,10 +29,26 @@ function generatePassword() {
   var guaranteedChar = [];
   
   var password = [];
-    
+  
   var passwordLength;
-
+  
   var charTypeCounter = 0;
+
+  // Choose Password Length
+  passwordLength = Math.floor(Number(window.prompt("How many characters would you like the password to be? It must be between 8 and 128.")));
+    
+  if (Number.isNaN(passwordLength)) { // what if they click cancel?
+    alert("That is not a number.");
+    return null;
+  };
+  if (passwordLength.length < 8) {
+    alert("It must be at least 8 characters long.");
+    return null;
+  };
+  if (passwordLength.length > 128) {
+    alert("It must be less than 128 characters long.");
+    return null;
+  };
 
   // Choose Character Types Used
   var userOptions = confirm("Should we include uppercase letters in the password?");
@@ -77,22 +93,6 @@ function generatePassword() {
 
   if (!userOptions) {
     alert("You must choose at least 1 character type!");
-    return null;
-  };
-
-  // Choose Password Length
-  passwordLength = Math.floor(Number(window.prompt("How many characters would you like the password to be? It must be between 8 and 128.")));
-          
-  if (Number.isNaN(passwordLength)) {
-    alert("That is not a number.");
-    return null;
-  }
-  if (passwordLength.length < 8) {
-    alert("It must be at least 8 characters long.");
-    return null;
-  }
-  if (passwordLength.length > 128) {
-    alert("It must be less than 128 characters long.");
     return null;
   };
 
