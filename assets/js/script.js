@@ -36,16 +36,18 @@ function generatePassword() {
 
   // Choose Password Length
   passwordLength = Math.floor(Number(window.prompt("How many characters would you like the password to be? It must be between 8 and 128.")));
-    
-  if (Number.isNaN(passwordLength)) { // what if they click cancel?
+  
+  if (Number.isNaN(passwordLength)) { // ISSUE:  what if they click cancel?
     alert("That is not a number.");
     return null;
   };
-  if (passwordLength.length < 8) {
+
+  if (passwordLength < 8) {
     alert("It must be at least 8 characters long.");
     return null;
   };
-  if (passwordLength.length > 128) {
+
+  if (passwordLength > 128) {
     alert("It must be less than 128 characters long.");
     return null;
   };
