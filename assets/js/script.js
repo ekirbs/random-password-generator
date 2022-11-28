@@ -4,22 +4,22 @@ var generateBtn = document.querySelector("#generate");
 //uppercase letter array
 var ALPHA = Array.from(Array(26)).map((e, i) => i + 65);
 var uppercaseAlphabet = ALPHA.map((x) => String.fromCharCode(x));
-console.log(uppercaseAlphabet);
+// console.log(uppercaseAlphabet);
 
 //lowercase letter array
 var alpha = Array.from(Array(26)).map((e, i) => i + 97);
 var lowercaseAlphabet = alpha.map((x) => String.fromCharCode(x));
-console.log(lowercaseAlphabet);
+// console.log(lowercaseAlphabet);
 
 //numbers array
 var numbers = Array.from(Array(10).keys());
 numbers.toString();
-console.log(numbers);
+// console.log(numbers);
 
 //special characters array
 var spec = Array.from(Array(16)).map((e, i) => i + 32);
 var specCharacters = spec.map((x) => String.fromCharCode(x));
-console.log(specCharacters);
+// console.log(specCharacters);
 
 //function generatePassword()
 function generatePassword() {
@@ -59,8 +59,8 @@ function generatePassword() {
     passwordOptions = passwordOptions.concat(uppercaseAlphabet);
     guaranteedChar.push(uppercaseAlphabet[Math.floor(Math.random() * uppercaseAlphabet.length)]);
     charTypeCounter++;
-    console.log(passwordOptions);
-    console.log(guaranteedChar);
+    // console.log(passwordOptions);
+    // console.log(guaranteedChar);
   };
   
   var userOptions = confirm("Should we include lowercase letters in the password?");
@@ -69,8 +69,8 @@ function generatePassword() {
     passwordOptions = passwordOptions.concat(lowercaseAlphabet);
     guaranteedChar.push(lowercaseAlphabet[Math.floor(Math.random() * lowercaseAlphabet.length)]);
     charTypeCounter++;
-    console.log(passwordOptions);
-    console.log(guaranteedChar);
+    // console.log(passwordOptions);
+    // console.log(guaranteedChar);
   };
   
   var userOptions = confirm("Should we include numbers in the password?");
@@ -79,8 +79,8 @@ function generatePassword() {
     passwordOptions = passwordOptions.concat(numbers);
     guaranteedChar.push(numbers[Math.floor(Math.random() * numbers.length)]);
     charTypeCounter++;
-    console.log(passwordOptions);
-    console.log(guaranteedChar);
+    // console.log(passwordOptions);
+    // console.log(guaranteedChar);
   };
   
   var userOptions = confirm("Should we include special characters in the password?");
@@ -89,8 +89,8 @@ function generatePassword() {
     passwordOptions = passwordOptions.concat(specCharacters);
     guaranteedChar.push(specCharacters[Math.floor(Math.random() * specCharacters.length)]);
     charTypeCounter++;
-    console.log(passwordOptions);
-    console.log(guaranteedChar);
+    // console.log(passwordOptions);
+    // console.log(guaranteedChar);
   };
 
   if (!userOptions) {
@@ -116,7 +116,7 @@ function generatePassword() {
     return guaranteedChar;
   };
     
-  console.log(guaranteedChar);
+  // console.log(guaranteedChar);
 
   password = shuffleArray(guaranteedChar).join("");
 
